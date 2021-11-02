@@ -39,6 +39,7 @@ module.exports = {
         open: true,
         port: 3000,
         static: ['src'],
+        hot: true
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -93,19 +94,19 @@ module.exports = {
                     }
                 }
             },
+            // {
+            //     test: /\.css$/,
+            //     use: [
+            //         {
+            //             loader: MiniCssExtractPlugin.loader,
+            //             options: {},
+            //         },
+            //         'css-loader'
+            //     ]
+            // },
             {
-                test: /\.css$/,
-                use: [
-                    {
-                        loader: MiniCssExtractPlugin.loader,
-                        options: {},
-                    },
-                    'css-loader'
-                ]
-            },
-            {
-                test: /\.s[ac]ss$/i,
-                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+                test: /\.(s[ac]ss|css)$/i,
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader']
             },
             {
                 test: /\.html$/,
@@ -115,7 +116,7 @@ module.exports = {
                 test: /\.(png|jpg|gif|svg|jpeg)$/,
                 type: 'asset/resource',
                 generator: {
-                    filename: 'assets/images/[contenthash][ext][query]'
+                    filename: 'assets/images/[contenthash][ext]'
                 }
             },
             {
