@@ -1,0 +1,10 @@
+@import "_fonts.css";
+@import '~normalize.css';
+
+body{
+    font-family: "Roboto";
+}
+h1{
+    font-family: 'Fruktur';
+    color: red;
+}
