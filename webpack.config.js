@@ -1,22 +1,19 @@
 const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const TerserWebpackPlugin = require('terser-webpack-plugin')
 
 const isDev = process.env.NODE_ENV === 'development'
 const optimization = () => {
     const config = {
         splitChunks: {
-            chunks: 'all'
-        }
+            chunks: 'all',
+        },
     }
     if (!isDev) {
-        config.minimizer = [
-            new CssMinimizerPlugin(),
-            new TerserWebpackPlugin()
-        ]
+        config.minimizer = [new CssMinimizerPlugin(), new TerserWebpackPlugin()]
     }
     return config
 }
@@ -27,10 +24,10 @@ module.exports = {
     mode: 'development',
     entry: {
         main: ['@babel/polyfill', './index.js'],
-        another: './another.ts'
+        another: './another.ts',
     },
     output: {
-        filename: "[name].[contenthash].js",
+        filename: '[name].[contenthash].js',
         path: path.resolve(__dirname, 'dist'),
         assetModuleFilename: 'assets/[name].[ext]',
     },
@@ -39,16 +36,16 @@ module.exports = {
         open: true,
         port: 3000,
         static: ['src'],
-        hot: true
+        hot: true,
     },
     plugins: [
         new HtmlWebpackPlugin({
             template: './index.html',
-            minify: !isDev
+            minify: !isDev,
         }),
         new CleanWebpackPlugin(),
         new MiniCssExtractPlugin({
-            filename: "css/[name].[contenthash].css",
+            filename: 'css/[name].[contenthash].css',
         }),
     ],
     module: {
@@ -60,9 +57,9 @@ module.exports = {
                     loader: 'babel-loader',
                     options: {
                         presets: ['@babel/preset-env'],
-                        plugins: ['@babel/plugin-proposal-class-properties']
-                    }
-                }
+                        plugins: ['@babel/plugin-proposal-class-properties'],
+                    },
+                },
             },
             {
                 test: /\.ts$/,
@@ -70,9 +67,9 @@ module.exports = {
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['@babel/preset-env', '@babel/preset-typescript']
-                    }
-                }
+                        presets: ['@babel/preset-env', '@babel/preset-typescript'],
+                    },
+                },
             },
             {
                 test: /\.jsx$/,
@@ -80,9 +77,9 @@ module.exports = {
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['@babel/preset-env', '@babel/preset-react']
-                    }
-                }
+                        presets: ['@babel/preset-env', '@babel/preset-react'],
+                    },
+                },
             },
             {
                 test: /\.tsx$/,
@@ -90,9 +87,9 @@ module.exports = {
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['@babel/preset-env', '@babel/preset-typescript', '@babel/preset-react']
-                    }
-                }
+                        presets: ['@babel/preset-env', '@babel/preset-typescript', '@babel/preset-react'],
+                    },
+                },
             },
             // {
             //     test: /\.css$/,
@@ -106,25 +103,25 @@ module.exports = {
             // },
             {
                 test: /\.(s[ac]ss|css)$/i,
-                use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader']
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader'],
             },
             {
                 test: /\.html$/,
-                use: ['html-loader']
+                use: ['html-loader'],
             },
             {
                 test: /\.(png|jpg|gif|svg|jpeg)$/,
                 type: 'asset/resource',
                 generator: {
-                    filename: 'assets/images/[contenthash][ext]'
-                }
+                    filename: 'assets/images/[contenthash][ext]',
+                },
             },
             {
                 test: /\.(eot|ttf|woff)$/,
                 type: 'asset/resource',
                 generator: {
-                    filename: 'assets/fonts/[contenthash][ext][query]'
-                }
+                    filename: 'assets/fonts/[contenthash][ext][query]',
+                },
             },
             {
                 test: /\.(csv|tsv)$/i,
@@ -134,6 +131,6 @@ module.exports = {
                 test: /\.xml$/i,
                 use: ['xml-loader'],
             },
-        ]
+        ],
     },
 }
