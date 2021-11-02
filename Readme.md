@@ -1,8 +1,6 @@
 # 📦 Webpack Template
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-
-Webpack 5 boilerplate using `Babel`,`TypeScript`,`React`,`Sass/Scss`, `Normalize`, .
+Webpack 5 boilerplate using `Babel`,`TypeScript`,`React`,`Sass/Scss`,`Normalize`.
 
 ## Installation
 
@@ -26,6 +24,11 @@ You can view the development server at `localhost:3000`.
 
 ```bash
 npm run build
+```
+### Development build
+
+```bash
+npm run dev
 ```
 
 ## Features
@@ -53,7 +56,6 @@ npm run build
 
 - [`babel-loader`](https://webpack.js.org/loaders/babel-loader/) - Transpile files with Babel and webpack
 - [`sass-loader`](https://webpack.js.org/loaders/sass-loader/) - Load SCSS and compile to CSS
-- [`node-sass`](https://github.com/sass/node-sass) - Node Sass
 - [`css-loader`](https://webpack.js.org/loaders/css-loader/) - Resolve CSS imports
 - [`style-loader`](https://webpack.js.org/loaders/style-loader/) - Inject CSS into the DOM
 - [`xml-loader`](https://github.com/gisikw/xml-loader) - Plugin for loading XML files
