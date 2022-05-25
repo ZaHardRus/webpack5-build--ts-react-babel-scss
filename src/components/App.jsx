@@ -1,5 +1,11 @@
-import s from './App.module.scss'
+import React from 'react'
+import styles from './App.module.scss'
 
-export const App = () => {
-  return <div className={s.app}></div>
+const App = () => {
+    return (
+        <div className={styles.app}>
+            hello
+        </div>
+    )
 }
+export default App

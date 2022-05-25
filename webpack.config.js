@@ -4,6 +4,8 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const TerserWebpackPlugin = require('terser-webpack-plugin')
+const tailwindcss = require('tailwindcss')
+const autoprefixer = require('autoprefixer')
 
 const isDev = process.env.NODE_ENV === 'development'
 const optimization = () => {
@@ -11,6 +13,7 @@ const optimization = () => {
         splitChunks: {
             chunks: 'all',
         },
+        // runtimeChunk: 'single',
     }
     if (!isDev) {
         config.minimizer = [new CssMinimizerPlugin(), new TerserWebpackPlugin()]
@@ -32,6 +35,11 @@ module.exports = {
         assetModuleFilename: 'assets/[name].[ext]',
     },
     optimization: optimization(),
+    // performance: {
+    //     hints: false,
+    //     maxEntrypointSize: 512000,
+    //     maxAssetSize: 512000,
+    // },
     devServer: {
         open: true,
         port: 3000,
@@ -102,8 +110,26 @@ module.exports = {
             //     ]
             // },
             {
-                test: /\.(s[ac]ss|css)$/i,
-                use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader'],
+                test: /\.(css|scss|sass)$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    "css-loader", // translates CSS into CommonJS
+                    {
+                        loader: "sass-loader",
+                        options: {
+                            implementation: require("sass"),
+                        }
+                    },
+                    {
+                        loader: 'postcss-loader', // postcss loader needed for tailwindcss
+                        options: {
+                            postcssOptions: {
+                                ident: 'postcss',
+                                plugins: [tailwindcss, autoprefixer],
+                            },
+                        },
+                    },
+                ],
             },
             {
                 test: /\.html$/,

@@ -1,5 +1,8 @@
 @import '_fonts.css';
-@import '~normalize.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 body {
   font-family: 'Roboto';
